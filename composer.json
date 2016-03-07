@@ -1,11 +1,11 @@
 {
     "name": "draftcms/site-skeleton",
-    "description": “DraftCMS client Site Skeleton”,
-    "keywords": [“skeleton”, “framework", “draftcms”, “hustleworks”],
-    "license": “Proprietary”,
+    "description": "DraftCMS client Site Skeleton",
+    "keywords": ["skeleton", "framework", "draftcms", "hustleworks"],
+    "license": "Proprietary",
     "type": "project",
     "require": {
-        "php": ">=7.0.0”,
+        "php": ">=7.0.0",
         "laravel/framework": "5.2.*"
     },
     "require-dev": {
