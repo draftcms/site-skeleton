@@ -5,8 +5,10 @@
     "license": "Proprietary",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
-        "laravel/framework": "5.2.*"
+        "php": ">=5.6.0",
+        "laravel/framework": "5.2.*",
+        "laravel/socialite": "^2.0",
+        "illuminate/html":"5.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

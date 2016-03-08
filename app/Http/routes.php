@@ -29,3 +29,12 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+	Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+
+    Route::get('/home', 'HomeController@index');
+});
+
