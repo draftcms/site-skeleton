@@ -32,8 +32,11 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
-	Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+
+    // social media login routes
+    Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
+	Route::get('/auth/{diver}/callback', 'Auth\AuthController@handleProviderCallback');
+	Route::get('/profile', '')
 
     Route::get('/home', 'HomeController@index');
 });

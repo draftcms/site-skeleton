@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Access all relationships to this User
+     *
+     */
+    public function socialConnection(){
+        return $this->hasMany('App/SocialAuth');
+    } 
+    
 }

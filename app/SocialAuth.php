@@ -1,0 +1,36 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class SocialAuth extends Model
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'token', 'provider', 'provider_id', 'user_id',
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'token',
+    ];
+
+    /**
+     * Access inverse relationship to user
+     *
+     */
+    public function socialConnection()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+}

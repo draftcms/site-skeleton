@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\SocialAuth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Socialite;
+use Auth;
+
 
 class AuthController extends Controller
 {
@@ -72,24 +75,72 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return Response
+     * Redirect the user to the Social Media authentication page.
+     * 
+     * @param $driver string containing proper social media driver
+     * @return Redirect to home page
      */
-    public function redirectToProvider()
+    public function redirectToProvider($driver)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($driver)->redirect();
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from Social Media.
      *
+     * @param $driver string containing proper social media driver
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($driver)
     {
-        $user = Socialite::driver('github')->user();
+        try {
+            $user = Socialite::driver($driver)->user();
+        } catch (Exception $e) {
+            return Redirect::to('auth/'.$driver);
+        }
 
-        // $user->token;
+        $authUser = $this->findOrCreateUser($user, $driver);
+
+        return redirect('home');
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $socialUser data object from social media provider
+     * @param $provider string containing driver name
+     * @return Auth logged in user
+     */
+    private function findOrCreateUser($socialUser, $provider)
+    {
+        // get user if already registered and return
+        if ($authUser = SocialAuth::where('token', $socialUser->token)->first()) {
+            return Auth::loginUsingId($authUser->user_id);
+        }
+
+        // set user email to name if no value returned from provider
+        if(!$socialUser->email){
+            $socialUser->email = $socialUser->name;
+        }
+
+        // create Users entry then create Social_Auths entry
+        $user = User::create([
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'password' => '',
+        ]);
+
+        // create SocialAuths entry pointing to registered user
+        SocialAuth::create([
+            'user_id' => $user->id,
+            'provider' => $provider,
+            'provider_id' => $socialUser->id,
+            'token' => $socialUser->token,
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+        ]);
+
+        return Auth::loginUsingId($user->id);
+
     }
 }
