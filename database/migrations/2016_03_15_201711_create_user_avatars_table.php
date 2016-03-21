@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialAuthsTable extends Migration
+class CreateUserAvatarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreateSocialAuthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_auths', function (Blueprint $table) {
+        Schema::create('user_avatars', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('provider');
-            $table->string('provider_id');
-            $table->string('token');
-            $table->string('name');
-            $table->string('email');
+            $table->string('file_path');
+            $table->string('original_name');
+            $table->string('extension');
+            $table->string('size');
+            $table->string('height');
+            $table->string('width');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateSocialAuthsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('social_auths');
+        Schema::drop('user_avatars');
     }
 }

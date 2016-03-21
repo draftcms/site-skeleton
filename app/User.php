@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
+
+    use SoftDeletes;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -29,7 +33,14 @@ class User extends Authenticatable
      *
      */
     public function socialConnection(){
-        return $this->hasMany('App/SocialAuth');
+        return $this->hasMany('App\SocialAuth');
     } 
     
+    /**
+     * Access all relationships to this User
+     *
+     */
+    public function avatar(){
+        return $this->hasOne('App\UserAvatar');
+    } 
 }

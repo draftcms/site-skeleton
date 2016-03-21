@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\SocialAuth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Socialite;
-use Auth;
+use Log;
+use App\Services\SocialAuthService;
 
 
 class AuthController extends Controller
@@ -82,7 +80,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider($driver)
     {
-        return Socialite::driver($driver)->redirect();
+        return SocialAuthService::redirectToProvider($driver);
     }
 
     /**
@@ -93,54 +91,7 @@ class AuthController extends Controller
      */
     public function handleProviderCallback($driver)
     {
-        try {
-            $user = Socialite::driver($driver)->user();
-        } catch (Exception $e) {
-            return Redirect::to('auth/'.$driver);
-        }
-
-        $authUser = $this->findOrCreateUser($user, $driver);
-
-        return redirect('home');
+        return SocialAuthService::handleProviderCallback($driver);
     }
 
-    /**
-     * Return user if exists; create and return if doesn't
-     *
-     * @param $socialUser data object from social media provider
-     * @param $provider string containing driver name
-     * @return Auth logged in user
-     */
-    private function findOrCreateUser($socialUser, $provider)
-    {
-        // get user if already registered and return
-        if ($authUser = SocialAuth::where('token', $socialUser->token)->first()) {
-            return Auth::loginUsingId($authUser->user_id);
-        }
-
-        // set user email to name if no value returned from provider
-        if(!$socialUser->email){
-            $socialUser->email = $socialUser->name;
-        }
-
-        // create Users entry then create Social_Auths entry
-        $user = User::create([
-            'name' => $socialUser->name,
-            'email' => $socialUser->email,
-            'password' => '',
-        ]);
-
-        // create SocialAuths entry pointing to registered user
-        SocialAuth::create([
-            'user_id' => $user->id,
-            'provider' => $provider,
-            'provider_id' => $socialUser->id,
-            'token' => $socialUser->token,
-            'name' => $socialUser->name,
-            'email' => $socialUser->email,
-        ]);
-
-        return Auth::loginUsingId($user->id);
-
-    }
 }

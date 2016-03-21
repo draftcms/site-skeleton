@@ -26,18 +26,28 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     // social media login routes
-    Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
-	Route::get('/auth/{diver}/callback', 'Auth\AuthController@handleProviderCallback');
-	Route::get('/profile', '')
+	Route::get('/connect/{diver}/callback', 'ProfileController@addProviderCallback');
+	Route::get('/connect/{driver}', 'ProfileController@addProvider');
+    Route::get('/disconnect/{driver}', 'ProfileController@disconnectProvider');
+
+
+    // profile
+    Route::get('/profile', 'ProfileController@form');
+	Route::get('/profile/update', 'ProfileController@update');
+    
+    Route::resource('/avatar', 'AvatarController');
 
     Route::get('/home', 'HomeController@index');
 });
+
+
+
+
+
+
 
