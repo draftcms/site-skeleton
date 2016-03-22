@@ -38,9 +38,16 @@ class ProfileController extends Controller
         $user->name = Input::get('name');
         $user->email = Input::get('email');
 
+        /* if password differs from what is stored */
         if(bcrypt(Input::get('password')) != $user->password){
-            $user->password = bcrypt(Input::get('password'));
+            
+            
+            if(Input::get('password')){
+                $user->password = bcrypt(Input::get('password'));
+            } 
         }
+        
+
 
         $user->save();
 

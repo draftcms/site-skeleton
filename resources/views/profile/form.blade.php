@@ -78,7 +78,6 @@
                         <a href="/connect/facebook" class="btn btn-primary">Connect to Facebook</a>
                     @endif
 
-
                     <!--Twitter-->
                     @if($providers->contains('twitter'))
                         <a href="/disconnect/twitter" class="btn btn-primary">Disconnect from Twitter</a>
