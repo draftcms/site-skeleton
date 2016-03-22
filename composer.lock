@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da9f6fab48fd3bbf174508f4dadd109b",
-    "content-hash": "68ac32222b0887d32a7addb0eddde2fb",
+    "hash": "5243ac42f8380c84659edcf69dab4a1f",
+    "content-hash": "5b44cef4773e35bf2651d0ab334a347c",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1652,6 +1652,123 @@
                 "diff"
             ],
             "time": "2015-12-08 07:14:41"
+        },
+        {
+            "name": "socialiteproviders/manager",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Manager.git",
+                "reference": "f91e366b29bedab6cb2491f32113f6a811ac4972"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Manager/zipball/f91e366b29bedab6cb2491f32113f6a811ac4972",
+                "reference": "f91e366b29bedab6cb2491f32113f6a811ac4972",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "laravel/framework": "~5.0|~5.1|~5.2",
+                "laravel/socialite": "~2.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Manager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wendt",
+                    "email": "andy@awendt.com"
+                }
+            ],
+            "description": "Easily add new or override built-in providers in Laravel Socialite.",
+            "time": "2016-02-20 22:18:54"
+        },
+        {
+            "name": "socialiteproviders/soundcloud",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/SoundCloud.git",
+                "reference": "67d368f9d482cd61b58d6d8d21a9754fd6248657"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/SoundCloud/zipball/67d368f9d482cd61b58d6d8d21a9754fd6248657",
+                "reference": "67d368f9d482cd61b58d6d8d21a9754fd6248657",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\SoundCloud\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "SoundCloud OAuth2 Provider for Laravel Socialite",
+            "time": "2015-06-18 14:22:42"
+        },
+        {
+            "name": "socialiteproviders/spotify",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Spotify.git",
+                "reference": "41780c852d52a74335dc372efaae6ed2cc143197"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Spotify/zipball/41780c852d52a74335dc372efaae6ed2cc143197",
+                "reference": "41780c852d52a74335dc372efaae6ed2cc143197",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Spotify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Spotify OAuth2 Provider for Laravel Socialite",
+            "time": "2015-12-31 12:56:11"
         },
         {
             "name": "swiftmailer/swiftmailer",

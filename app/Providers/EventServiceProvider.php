@@ -16,6 +16,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        // add listeners (aka providers) here
+        'SocialiteProviders\Spotify\SpotifyExtendSocialite@handle',
+        'SocialiteProviders\SoundCloud\SoundCloudExtendSocialite@handle',
+    ],
     ];
 
     /**

@@ -159,9 +159,14 @@ return [
         /*
          * Added
          */
-        Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
+
+        /* Removed:
+         *      Laravel\Socialite\SocialiteServiceProvider::class,
+         *      - Removed per http://socialiteproviders.github.io/providers/spotify/
+         */
 
     ],
 

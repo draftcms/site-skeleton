@@ -35,30 +35,45 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    
+
+    /**
+     * Social Media Services
+     */
+            
     'facebook' => [
-    'client_id' => env('FACEBOOK_ID'),
-    'client_secret' => env('FACEBOOK_SECRET'),
-    'redirect' => env('FACEBOOK_URL'),
+        'client_id' => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => env('FACEBOOK_URL'),
     ],
-    
 
     'twitter' => [
-    'client_id' => env('TWITTER_ID'),
-    'client_secret' => env('TWITTER_SECRET'),
-    'redirect' => env('TWITTER_URL'),
+        'client_id' => env('TWITTER_ID'),
+        'client_secret' => env('TWITTER_SECRET'),
+        'redirect' => env('TWITTER_URL'),
     ],
 
     'github' => [
-    'client_id' => env('GITHUB_ID'),
-    'client_secret' => env('GITHUB_SECRET'),
-    'redirect' => env('GITHUB_URL'),
+        'client_id' => env('GITHUB_ID'),
+        'client_secret' => env('GITHUB_SECRET'),
+        'redirect' => env('GITHUB_URL'),
     ],
 
     'google' => [
-    'client_id' => env('GOOGLE_ID'),
-    'client_secret' => env('GOOGLE_SECRET'),
-    'redirect' => env('GOOGLE_URL'),
+        'client_id' => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_URL'),
     ],
+
+    'spotify' => [
+        'client_id' => env('SPOTIFY_ID'),
+        'client_secret' => env('SPOTIFY_SECRET'),
+        'redirect' => env('SPOTIFY_URL'),  
+    ], 
+
+    'soundcloud' => [
+        'client_id' => env('SOUNDCLOUD_ID'),
+        'client_secret' => env('SOUNDCLOUD_SECRET'),
+        'redirect' => env('SOUNDCLOUD_URL'),  
+    ], 
 
 ];

@@ -100,6 +100,20 @@
                         <a href="/connect/github" class="btn btn-primary">Connect to GitHub</a>
                     @endif
 
+                    <!--Spotify-->
+                    @if($providers->contains('spotify'))
+                        <a href="/disconnect/spotify" class="btn btn-primary">Disconnect from Spotify</a>
+                    @else
+                        <a href="/connect/spotify" class="btn btn-primary">Connect to Spotify</a>
+                    @endif
+
+                    <!--SoundCloud-->
+                    @if($providers->contains('soundcloud'))
+                        <a href="/disconnect/soundcloud" class="btn btn-primary">Disconnect from SoundCloud</a>
+                    @else
+                        <a href="/connect/soundcloud" class="btn btn-primary">Connect to SoundCloud</a>
+                    @endif
+
                 </div>
             </div>
         </div>

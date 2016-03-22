@@ -13,7 +13,9 @@
         "illuminate/html":"5.0.*",
         "fabpot/php-cs-fixer": "^1.11",
         "intervention/image": "^2.3",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "socialiteproviders/spotify": "^1.1",
+        "socialiteproviders/soundcloud": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

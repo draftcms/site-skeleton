@@ -68,13 +68,17 @@
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
 
-                                <a href="/connect/github" class="btn btn-primary">Login with GitHub</a>
+                                <a href="/connect/github" class="btn btn-primary">Login with GitHub</a><br>
 
-                                <a href="/connect/twitter" class="btn btn-primary">Login with Twitter</a>
+                                <a href="/connect/twitter" class="btn btn-primary">Login with Twitter</a><br>
 
-                                <a href="/connect/facebook" class="btn btn-primary">Login with Facebook</a>
+                                <a href="/connect/facebook" class="btn btn-primary">Login with Facebook</a><br>
 
-                                <a href="/connect/google" class="btn btn-primary">Login with Google</a>
+                                <a href="/connect/google" class="btn btn-primary">Login with Google</a><br>
+
+                                <a href="/connect/spotify" class="btn btn-primary">Login with Spotify</a><br>
+
+                                <a href="/connect/soundcloud" class="btn btn-primary">Login with SoundCloud</a><br>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>

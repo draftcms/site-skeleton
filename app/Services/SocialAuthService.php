@@ -120,6 +120,12 @@ class SocialAuthService {
                 $social_user->email = $social_user->name;
             }
 
+            /* set user name & email to nickname if no value returned from provider */
+            if(!$social_user->name) {
+                $social_user->email = $social_user->nickname;
+                $social_user->name = $social_user->nickname;
+            }
+
             /* create Users entry */
             $user = User::create([
                 'name' => $social_user->name,
@@ -130,15 +136,20 @@ class SocialAuthService {
             /* create social user connection */
             SocialAuthService::createSocialUser($user, $social_user, $provider);
 
-            /* create image and store to server */
-            $img = Image::make($social_user->avatar);
-            $f_name = 'UID' . $user->id . '_' . time() . '.png';
-            $rel_path = 'avatar/' . $f_name;
-            $path = public_path($rel_path);
-            $img->save($path);
+            /* if an avatar is returned by the services create image and store to server */
+            if($social_user->avatar) {
 
-            /* add avatar entry*/
-            AvatarService::createAvatar($user, $img, $f_name, $rel_path, '');
+                /* gather info about photo */
+                $img = Image::make($social_user->avatar);
+                $f_name = 'UID' . $user->id . '_' . time() . '.png';
+                $rel_path = 'avatar/' . $f_name;
+                $path = public_path($rel_path);
+                $img->save($path);
+
+                /* add avatar entry*/
+                AvatarService::createAvatar($user, $img, $f_name, $rel_path, '');
+
+            }
 
         }
 
