@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Services\AvatarService;
 use App\UserAvatar;
-
-
+use Image;
+use Illuminate\Support\Facades\Input;
+use Auth;
 
 class AvatarController extends Controller
 {
@@ -73,8 +74,15 @@ class AvatarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        return AvatarService::addUserAvatar($id);
+
+        /* create instance of image from user */
+        $input_img = Input::file('file');
+        $img = Image::make($input_img);
+        $orig_name = $input_img->getClientOriginalName();
+
+        AvatarService::addUserAvatar(Auth::user(), $img, $orig_name);
+
+        return redirect('profile');
     }
 
     /**

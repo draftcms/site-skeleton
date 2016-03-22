@@ -14,63 +14,69 @@ use Auth;
 use Image;
 use Illuminate\Support\Facades\Input;
 
+
 class AvatarService {
 
 
-    public static function addUserAvatar($id) {
-        
-        $user = Auth::user();
+    /**
+     * Add an avatar for user
+     *
+     */
+    public static function addUserAvatar($user, $img, $orig_name) {
 
+        /* remove existing avatar entry in UserAvatar table and 
+         * delete image from server
+         */
         if($user->avatar){
-            $avatar = UserAvatar::find($id);
             $user->avatar()->delete();
         }
 
-        $image = Input::file('file');
-        $extension = $image->getClientOriginalExtension();
-        $orig_name = $image->getClientOriginalName(); 
-        $img = Image::make($image);
-        $f_name = 'UID' . $user->id . '_' . time() . '.png';
-        $rel_path = 'avatar/' . $f_name;
-        $path = public_path($rel_path);
+        /* find extension and name image file */
+        $ext = AvatarService::getExtFromMimeType($img->mime());
+        $f_name = 'UID' . $user->id . '_' . time() . '.' . $ext;
+
+        /* gather image details */
+        $details = [
+            'extension' => $ext,
+            'orig_name' => $orig_name,
+            'path' => 'avatar/' . $f_name,
+        ];
+
+        /* store file on server */
+        $path = public_path($details['path']);
         $img->save($path);
 
-        // create UserAvatar entry to associate with registered user
-        UserAvatar::create([
-            'user_id' => Auth::user()->id,
-            'file_path' => $rel_path,
-            'original_name' => $orig_name,
-            'extension' => $extension,
-            'size' => $img->filesize(),
-            'height' => $img->height(),
-            'width' => $img->width(),
-        ]);
-
-        return redirect('home');
+        /* create entry */
+        AvatarService::createAvatars($user, $img, $details);
     }
 
-    public static function addSocialAvatar() {
-
-    }
-
-    public static function createAvatar($user, $img, $f_name, $path, $orig_name) {
+    /**
+     * Create avatar entry in UserAvatar table
+     *
+     */
+    private static function createAvatars($user, $img, $details) {
         
-
         // create UserAvatar entry to associate with registered user
         UserAvatar::create([
             'user_id' => $user->id,
-            'file_path' => $path,
-            'original_name' => 'test',
-            'extension' => '.png',
+            'file_path' => $details['path'],
+            'original_name' => $details['orig_name'],
+            'extension' => $details['extension'],
             'size' => $img->filesize(),
             'height' => $img->height(),
             'width' => $img->width(),
         ]);
     }
-	
 
+    private static function getExtFromMimeType($type) {
 
+        $mime_types = [
+            'image/png' => 'png',
+            'image/jpeg' => 'jpg',
+            'image/gif' => 'gif',
+        ];
+
+        return $mime_types[$type];
+
+    }
 }
-
-
-

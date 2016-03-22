@@ -86,8 +86,6 @@ class SocialAuthService {
         return redirect('home');
     }
 
-
-
     /**
      * Return user if exists; create and return if doesn't
      *
@@ -106,7 +104,7 @@ class SocialAuthService {
             /* create social user connection */
             SocialAuthService::createSocialUser($user, $social_user, $provider);
 
-        /* if not logged in but user exists */
+        /* if not logged in but user exists, login and get user */
         } elseif ($auth_user = SocialAuth::where('provider', $provider)->where('provider_id',$social_user->id)->first()) {
 
             $user =  Auth::loginUsingId($auth_user->user_id);
@@ -133,32 +131,22 @@ class SocialAuthService {
                 'password' => '',
             ]);
 
+            /* Login user */
+            Auth::loginUsingId($user->id);
+
             /* create social user connection */
             SocialAuthService::createSocialUser($user, $social_user, $provider);
 
             /* if an avatar is returned by the services create image and store to server */
             if($social_user->avatar) {
 
-                /* gather info about photo */
+                /* create instance of avatar image */
                 $img = Image::make($social_user->avatar);
-                $f_name = 'UID' . $user->id . '_' . time() . '.png';
-                $rel_path = 'avatar/' . $f_name;
-                $path = public_path($rel_path);
-                $img->save($path);
 
-                /* add avatar entry*/
-                AvatarService::createAvatar($user, $img, $f_name, $rel_path, '');
-
+                /* add avatar entry */
+                AvatarService::addUserAvatar($user, $img, $provider);
             }
-
         }
-
         return $user;
     }
-
-    
-
 }
-
-
-
