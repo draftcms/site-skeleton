@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\User;
 use App\SocialAuth;
-use App\UserAvatar;
+use App\Services\AvatarService;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -15,6 +15,32 @@ use Image;
 
 class SocialAuthService {
 	
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $social_user data object from social media provider
+     * @param $provider string containing driver name
+     * @return Auth logged in user
+     */
+    private static function createSocialUser($user, $social_user, $provider)
+    {
+
+        /* set user email to name if no value returned from provider */
+        if(!$social_user->email) {
+            $social_user->email = $social_user->name;
+        }
+        
+        /* create SocialAuths entry pointing to  already registered user */
+        SocialAuth::create([
+            'user_id' => $user->id,
+            'provider' => $provider,
+            'provider_id' => $social_user->id,
+            'token' => $social_user->token,
+            'name' => $social_user->name,
+            'email' => $social_user->email,
+        ]);
+    }
+
     /**
      * Redirect the user to the Social Media authentication page.
      * 
@@ -40,7 +66,7 @@ class SocialAuthService {
             return Redirect::to('auth/'.$driver);
         }
 
-        $authUser = SocialAuthService::findOrCreateUser($user, $driver);
+        $auth_user = SocialAuthService::findOrCreateUser($user, $driver);
 
         return redirect('home');
     }
@@ -65,75 +91,61 @@ class SocialAuthService {
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $socialUser data object from social media provider
+     * @param $social_user data object from social media provider
      * @param $provider string containing driver name
      * @return Auth logged in user
      */
-    private static function findOrCreateUser($socialUser, $provider)
+    private static function findOrCreateUser($social_user, $provider)
     {
 
+        $user = null;
+
+        /* if user is logged in connect new provider */   
         if($user = Auth::user()){
 
-            // create SocialAuths entry pointing to registered user
-            SocialAuth::create([
-                'user_id' => $user->id,
-                'provider' => $provider,
-                'provider_id' => $socialUser->id,
-                'token' => $socialUser->token,
-                'name' => $socialUser->name,
-                'email' => 'test',
+            /* create social user connection */
+            SocialAuthService::createSocialUser($user, $social_user, $provider);
+
+        /* if not logged in but user exists */
+        } elseif ($auth_user = SocialAuth::where('provider', $provider)->where('provider_id',$social_user->id)->first()) {
+
+            $user =  Auth::loginUsingId($auth_user->user_id);
+
+
+        /* if not logged in and no user exists */
+        } else {
+            
+            /* set user email to name if no value returned from provider */
+            if(!$social_user->email) {
+                $social_user->email = $social_user->name;
+            }
+
+            /* create Users entry */
+            $user = User::create([
+                'name' => $social_user->name,
+                'email' => $social_user->email,
+                'password' => '',
             ]);
 
-            return redirect('profile');
+            /* create social user connection */
+            SocialAuthService::createSocialUser($user, $social_user, $provider);
+
+            /* create image and store to server */
+            $img = Image::make($social_user->avatar);
+            $f_name = 'UID' . $user->id . '_' . time() . '.png';
+            $rel_path = 'avatar/' . $f_name;
+            $path = public_path($rel_path);
+            $img->save($path);
+
+            /* add avatar entry*/
+            AvatarService::createAvatar($user, $img, $f_name, $rel_path, '');
+
         }
-        // get user if already registered and return
-        if ($authUser = SocialAuth::where('token', $socialUser->token)->first()) {
-            return Auth::loginUsingId($authUser->user_id);
-        }
 
-        // set user email to name if no value returned from provider
-        if(!$socialUser->email){
-            $socialUser->email = $socialUser->name;
-        }
-
-        // create Users entry then create Social_Auths entry
-        $user = User::create([
-            'name' => $socialUser->name,
-            'email' => $socialUser->email,
-            'password' => '',
-        ]);
-
-        // create SocialAuths entry pointing to registered user
-        SocialAuth::create([
-            'user_id' => $user->id,
-            'provider' => $provider,
-            'provider_id' => $socialUser->id,
-            'token' => $socialUser->token,
-            'name' => $socialUser->name,
-            'email' => $socialUser->email,
-        ]);
-
-        // create instance of avatar image
-        $img = Image::make($socialUser->avatar);
-        $f_name = 'UID' . $user->id . '_' . time() . '.png';
-        $rel_path = 'avatar/' . $f_name;
-        $path = public_path($rel_path);
-        
-        $img->save($path);
-
-        // create UserAvatar entry to associate with registered user
-        UserAvatar::create([
-            'user_id' => $user->id,
-            'file_path' => $rel_path,
-            'original_name' => 'test',
-            'extension' => '.png',
-            'size' => $img->filesize(),
-            'height' => $img->height(),
-            'width' => $img->width(),
-        ]);
-
-        return Auth::loginUsingId($user->id);
+        return $user;
     }
+
+    
 
 }
 

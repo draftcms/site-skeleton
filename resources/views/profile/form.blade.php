@@ -70,40 +70,36 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media Connections</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="PUT" action="{{ url('/profile/update') }}">
 
-                        <!--Facebook-->
-                        @if($providers->contains('facebook'))
-                            <a href="/disconnect/facebook" class="btn btn-primary">Disconnect from Facebook</a>
-                        @else
-                            <a href="/connect/facebook" class="btn btn-primary">Connect to Facebook</a>
-                        @endif
+                    <!--Facebook-->
+                    @if($providers->contains('facebook'))
+                        <a href="/disconnect/facebook" class="btn btn-primary">Disconnect from Facebook</a>
+                    @else
+                        <a href="/connect/facebook" class="btn btn-primary">Connect to Facebook</a>
+                    @endif
 
 
-                        <!--Twitter-->
-                        @if($providers->contains('twitter'))
-                            <a href="/disconnect/twitter" class="btn btn-primary">Disconnect from Twitter</a>
-                        @else
-                            <a href="/connect/twitter" class="btn btn-primary">Connect to Twitter</a>
-                        @endif
+                    <!--Twitter-->
+                    @if($providers->contains('twitter'))
+                        <a href="/disconnect/twitter" class="btn btn-primary">Disconnect from Twitter</a>
+                    @else
+                        <a href="/connect/twitter" class="btn btn-primary">Connect to Twitter</a>
+                    @endif
 
-                        <!--Google-->
-                        @if($providers->contains('google'))
-                            <a href="/disconnect/google" class="btn btn-primary">Disconnect from Google</a>
-                        @else
-                            <a href="/connect/google" class="btn btn-primary">Connect to Google</a>
-                        @endif
+                    <!--Google-->
+                    @if($providers->contains('google'))
+                        <a href="/disconnect/google" class="btn btn-primary">Disconnect from Google</a>
+                    @else
+                        <a href="/connect/google" class="btn btn-primary">Connect to Google</a>
+                    @endif
 
-                        <!--GitHub-->
-                        @if($providers->contains('github'))
-                            <a href="/disconnect/github" class="btn btn-primary">Disconnect from GitHub</a>
-                        @else
-                            <a href="/connect/github" class="btn btn-primary">Connect to GitHub</a>
-                        @endif
+                    <!--GitHub-->
+                    @if($providers->contains('github'))
+                        <a href="/disconnect/github" class="btn btn-primary">Disconnect from GitHub</a>
+                    @else
+                        <a href="/connect/github" class="btn btn-primary">Connect to GitHub</a>
+                    @endif
 
-                        
-                         
-                    </form>
                 </div>
             </div>
         </div>
@@ -114,12 +110,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Profile Image</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/avatar/') }}/{{$user->avatar->id}}" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/avatar/') }}/{{$user->id}}" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">
                         {!! csrf_field() !!}
 
+                        @if($user->avatar)
                         <h5>Current avatar</h5>
                         <img src="{{$user->avatar->file_path}}">
+                        @else
+                        <h5>No avatar for this user</h5>
+                        @endif
 
                         <h5>Upload a custom avatar image.</h5>
                         <input type="file" name="file"></input>

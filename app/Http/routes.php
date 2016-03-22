@@ -28,19 +28,20 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => 'web'], function () {
+    
     Route::auth();
 
-    // social media login routes
+    // social media connect/disconnect routes
 	Route::get('/connect/{diver}/callback', 'ProfileController@addProviderCallback');
 	Route::get('/connect/{driver}', 'ProfileController@addProvider');
     Route::get('/disconnect/{driver}', 'ProfileController@disconnectProvider');
 
 
-    // profile
+    // profile routes
     Route::get('/profile', 'ProfileController@form');
 	Route::get('/profile/update', 'ProfileController@update');
-    
     Route::resource('/avatar', 'AvatarController');
+    
 
     Route::get('/home', 'HomeController@index');
 });

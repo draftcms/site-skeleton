@@ -21,7 +21,10 @@ class AvatarService {
         
         $user = Auth::user();
 
-        $avatar = UserAvatar::find($id);
+        if($user->avatar){
+            $avatar = UserAvatar::find($id);
+            $user->avatar()->delete();
+        }
 
         $image = Input::file('file');
         $extension = $image->getClientOriginalExtension();
@@ -31,8 +34,6 @@ class AvatarService {
         $rel_path = 'avatar/' . $f_name;
         $path = public_path($rel_path);
         $img->save($path);
-
-        $user->avatar()->delete();
 
         // create UserAvatar entry to associate with registered user
         UserAvatar::create([
@@ -45,14 +46,26 @@ class AvatarService {
             'width' => $img->width(),
         ]);
 
-
-        $avatar->save();
-
         return redirect('home');
     }
 
     public static function addSocialAvatar() {
 
+    }
+
+    public static function createAvatar($user, $img, $f_name, $path, $orig_name) {
+        
+
+        // create UserAvatar entry to associate with registered user
+        UserAvatar::create([
+            'user_id' => $user->id,
+            'file_path' => $path,
+            'original_name' => 'test',
+            'extension' => '.png',
+            'size' => $img->filesize(),
+            'height' => $img->height(),
+            'width' => $img->width(),
+        ]);
     }
 	
 
