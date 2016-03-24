@@ -4,16 +4,16 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class UserATest3LogoutTest extends TestCase
 {
+
     /**
-     * A basic functional test example.
-     *
-     * @return void
+     * Test for logging out a user who is logged in.
      */
-    public function testBasicExample()
+    public function testUserLogout()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $this->visit('/logout');
+        $this->seePageIs('/');
     }
+
 }
