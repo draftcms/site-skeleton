@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,7 +33,7 @@ class User extends Authenticatable
      *
      */
     public function socialConnection(){
-        return $this->hasMany('App\SocialAuth');
+        return $this->hasMany('App\Models\SocialAuth');
     } 
     
     /**
@@ -41,6 +41,6 @@ class User extends Authenticatable
      *
      */
     public function avatar(){
-        return $this->hasOne('App\UserAvatar');
+        return $this->hasOne('App\Models\UserAvatar');
     } 
 }

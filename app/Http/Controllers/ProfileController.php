@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\SocialAuth;
+use App\Models\User;
+use App\Models\SocialAuth;
 use App\Http\Requests;
 use Auth;
 use Illuminate\Support\Facades\Input;

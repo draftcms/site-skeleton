@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\User;
-use App\SocialAuth;
-use App\UserAvatar;
+use App\Models\User;
+use App\Models\SocialAuth;
+use App\Models\UserAvatar;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

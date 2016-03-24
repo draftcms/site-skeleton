@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Log;
 use App\Services\SocialAuthService;
-use App\User;
+use App\Models\User;
 
 
 class AuthController extends Controller

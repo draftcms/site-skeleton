@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class UserAvatar extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'file_path', 'original_name', 'extension', 'size', 'height', 'width'
+        'user_id', 'file_path', 'file_path_sm', 'file_path_md', 'original_name', 'extension', 'size', 'height', 'width'
     ];
 
     /**
@@ -21,6 +21,6 @@ class UserAvatar extends Model
      */
     public function avatar()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

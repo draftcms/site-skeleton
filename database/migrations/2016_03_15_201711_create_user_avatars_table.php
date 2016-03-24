@@ -16,6 +16,8 @@ class CreateUserAvatarsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('file_path');
+            $table->string('file_path_sm');
+            $table->string('file_path_md');
             $table->string('original_name');
             $table->string('extension');
             $table->string('size');
