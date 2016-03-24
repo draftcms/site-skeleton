@@ -118,6 +118,15 @@
         </div>
     </div>
 
+    @if(Session::has('status'))
+    <div class="col-md-8 col-md-offset-2 alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ Session::get('status') }}</strong> 
+    </div>               
+    @endif
+
+    
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -152,4 +161,5 @@
         </div>
     </div>
 </div>
+
 @endsection

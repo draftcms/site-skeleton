@@ -88,5 +88,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        @if(Session::has('fail'))
+        <div class="col-md-8 col-md-offset-2 alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ Session::get('fail') }}</strong> 
+        </div>               
+        @endif
+        
+    </div>
 </div>
 @endsection

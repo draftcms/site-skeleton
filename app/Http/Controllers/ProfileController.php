@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-    	return redirect('home');
+    	return redirect('profile');
     }
 
     /**
@@ -63,12 +63,14 @@ class ProfileController extends Controller
     public function addProvider($driver)
     {
         return SocialAuthService::redirectToProvider($driver);
-       
     }
 
-    public function addProviderCallback($driver)
+    public function addProviderCallback(Request $request, $driver)
     {
-        return SocialAuthService::handleProviderCallback($driver);
+        $go_to = SocialAuthService::handleProviderCallback($request, $driver);
+
+
+        return redirect($go_to);
     }
 
     /**
@@ -77,9 +79,11 @@ class ProfileController extends Controller
      * @param $provider string containing social media service
      * @return Response
      */
-    public function disconnectProvider($provider)
+    public function disconnectProvider(Request $request, $provider)
     {
-        return SocialAuthService::disconnectProvider($provider);
+        SocialAuthService::disconnectProvider($request, $provider);
+
+        return redirect('profile');
     }
 
 
