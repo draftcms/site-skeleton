@@ -6,6 +6,7 @@ use App\Models\ContactForms;
 use App\Models\ContactFormTypes;
 use App\Models\ContactFormResponses;
 use Auth;
+use Mail;
 use Illuminate\Http\Request;
 
 class ContactFormService {
@@ -24,7 +25,7 @@ class ContactFormService {
             ]);
 
 		} catch (\Exception $e) {
-			dd($e);
+			
 		}
 
 
@@ -38,11 +39,11 @@ class ContactFormService {
 			}
 
 			/* create ContactFormResponse entry */
-            ContactFormResponses::create([
-                'name'       		=> $input['name'],
-                'email'      		=> $input['email'],
-                'type_id'   		=> $input['type_id'],
-                'notes'         	=> $input['notes'],
+            $response = ContactFormResponses::create([
+                'name'       			=> $input['name'],
+                'email'      			=> $input['email'],
+                'type_id'   			=> $input['type_id'],
+                'notes'         		=> $input['notes'],
                 'ip_address'			=> $_SERVER['REMOTE_ADDR'],
                 'user_id'				=> $user_id,
                 'user_agent_string'		=> $_SERVER['HTTP_USER_AGENT'],
@@ -52,6 +53,20 @@ class ContactFormService {
 		} catch (\Exception $e) {
 			
 		}
+
+		// build data for email
+		$data = [
+			'name' 		=> $response->name,
+			'email'		=> $response->email,
+			'notes'		=> $response->notes,
+		];
+
+		// send out email
+		Mail::send('emails.test', $data, function ($message) use ($response){
+    		$message->from($response->email, 'Draft-CMS E-mail Service');
+
+    		$message->to(explode(',', $response->type->recipients))->subject('Support email');
+		});
 	}
 
 }
