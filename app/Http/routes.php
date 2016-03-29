@@ -46,6 +46,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 });
 
+Route::get('/contact/', 'ContactFormController@getForm');
+Route::post('/contact/submit', 'ContactFormController@postForm');
+
 
 
 

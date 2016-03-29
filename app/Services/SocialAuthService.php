@@ -91,7 +91,7 @@ class SocialAuthService {
             $user =  Auth::loginUsingId($auth_user->user_id);
 
 
-        /* if not logged in and no user exists */
+        /* if not logged in and no user exists attempt to create user with details from provider */
         } else {
             
             /* set user email to name if no value returned from provider */
@@ -110,9 +110,9 @@ class SocialAuthService {
                 
                 /* create Users entry */
                 $user = User::create([
-                    'name' => $social_user->name,
-                    'email' => $social_user->email,
-                    'password' => '',
+                    'name'      => $social_user->name,
+                    'email'     => $social_user->email,
+                    'password'  => '',
                 ]);
 
             } catch (\Exception $e){
@@ -169,12 +169,12 @@ class SocialAuthService {
 
             /* create SocialAuths entry pointing to  already registered user */
             SocialAuth::create([
-                'user_id' => $user->id,
-                'provider' => $provider,
-                'provider_id' => $social_user->id,
-                'token' => $social_user->token,
-                'name' => $social_user->name,
-                'email' => $social_user->email,
+                'user_id'       => $user->id,
+                'provider'      => $provider,
+                'provider_id'   => $social_user->id,
+                'token'         => $social_user->token,
+                'name'          => $social_user->name,
+                'email'         => $social_user->email,
             ]);
 
             $request->session()->flash('status', 'You have successfully connected
