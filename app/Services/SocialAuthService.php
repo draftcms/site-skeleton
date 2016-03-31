@@ -56,12 +56,10 @@ class SocialAuthService {
             
             $connection = Auth::user()->socialConnection()->where('provider',$driver);
             $connection->delete();
-            $request->session()->flash('status', 'Your ' . $driver . ' account
-                was successfully disconnected.');
+            $request->session()->flash('status', 'Your ' . $driver . ' account was successfully disconnected.');
 
         } catch (\Exception $e) {
-            $request->session()->flash('fail', 'Your ' . $driver . ' account
-                could not be disconnected.');
+            $request->session()->flash('fail', 'Your ' . $driver . ' account could not be disconnected.');
         }
 
         return redirect('home');
@@ -77,7 +75,7 @@ class SocialAuthService {
     private static function findOrCreateUser($request, $social_user, $provider)
     {
 
-        $go_to = 'profile';
+        $redirect_to = 'profile';
 
         /* if user is logged in connect new provider */   
         if($user = Auth::user()){
@@ -118,11 +116,10 @@ class SocialAuthService {
             } catch (\Exception $e){
                 $errorCode = $e->errorInfo[1];
                 if($errorCode == 1062){
-                    $request->session()->flash('fail', 'A user is already 
-                        registered under that email');
+                    $request->session()->flash('fail', 'A user is already registered under that email');
                 }
 
-                $go_to = 'login';
+                $redirect_to = 'login';
             }
 
             if($user){
@@ -146,7 +143,7 @@ class SocialAuthService {
                 
         }
 
-        return $go_to;
+        return $redirect_to;
     }
 
     /**
@@ -177,14 +174,12 @@ class SocialAuthService {
                 'email'         => $social_user->email,
             ]);
 
-            $request->session()->flash('status', 'You have successfully connected
-                your ' . $provider . ' account.');
+            $request->session()->flash('status', 'You have successfully connected your ' . $provider . ' account.');
             
         } catch (\Exception $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == 1062){
-                $request->session()->flash('status', 'A user is already 
-                    registered under that email');
+                $request->session()->flash('status', 'A user is already registered under that email');
             }
         }
         

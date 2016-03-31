@@ -17,7 +17,7 @@
                             <label class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email">
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                             </div>
                         </div>
 
@@ -48,8 +48,7 @@
                             <label class="col-md-4 control-label">Message</label>
 
                             <div class="col-md-6">
-                                <textarea class="form-control" name="notes">
-                                </textarea>
+                                <textarea class="form-control" name="notes">{{ old('notes') }}</textarea>
                             </div>
                         </div>
 

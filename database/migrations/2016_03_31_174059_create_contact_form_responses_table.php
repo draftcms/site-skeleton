@@ -21,6 +21,7 @@ class CreateContactFormResponsesTable extends Migration
             $table->string('ip_address');
             $table->string('user_id')->nullable();
             $table->string('user_agent_string');
+            $table->text('session'); //_SESSION
             $table->foreign('type_id')->references('id')->on('contact_form_types');
             $table->timestamps();
             //$table->softDeletes();

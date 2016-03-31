@@ -32,10 +32,7 @@ class ContactFormController extends Controller
      */
     public function postForm(Request $request)
     {
-
-    	ContactFormService::handleFormData($request, Input::all());
-
-        //return redirect('home');
+    	return ContactFormService::handleFormData($request, Input::all());
     }
 
 }

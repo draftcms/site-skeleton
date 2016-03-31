@@ -12,7 +12,7 @@ class ContactFormResponses extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'type_id', 'notes', 'ip_address', 'user_id', 'user_agent_string',
+        'name', 'email', 'type_id', 'notes', 'ip_address', 'user_id', 'user_agent_string', 'session',
     ];
 
     /**

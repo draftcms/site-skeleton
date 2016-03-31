@@ -41,13 +41,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/profile', 'ProfileController@form');
 	Route::get('/profile/update', 'ProfileController@update');
     Route::resource('/avatar', 'AvatarController');
+
+    // contact form routes
+    Route::get('/contact/', 'ContactFormController@getForm');
+    Route::post('/contact/submit', 'ContactFormController@postForm');
     
 
     Route::get('/home', 'HomeController@index');
 });
 
-Route::get('/contact/', 'ContactFormController@getForm');
-Route::post('/contact/submit', 'ContactFormController@postForm');
+
 
 
 
