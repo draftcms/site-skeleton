@@ -48,7 +48,7 @@
                             <label class="col-md-4 control-label">Message</label>
 
                             <div class="col-md-6">
-                                <textarea class="form-control" name="notes">{{ old('notes') }}</textarea>
+                                <textarea name="notes">{{ old('notes') }}</textarea>
                             </div>
                         </div>
 

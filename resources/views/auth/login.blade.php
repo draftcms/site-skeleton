@@ -68,19 +68,28 @@
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
 
-                                <a href="/connect/github" class="btn btn-primary">Login with GitHub</a><br>
-
-                                <a href="/connect/twitter" class="btn btn-primary">Login with Twitter</a><br>
-
-                                <a href="/connect/facebook" class="btn btn-primary">Login with Facebook</a><br>
-
-                                <a href="/connect/google" class="btn btn-primary">Login with Google</a><br>
-
-                                <a href="/connect/spotify" class="btn btn-primary">Login with Spotify</a><br>
-
-                                <a href="/connect/soundcloud" class="btn btn-primary">Login with SoundCloud</a><br>
-
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+
+                                <h4>Login with social media</h4>
+
+                                <a href="/connect/twitter"><img class="soc_med_icon" src="images/social_media_icons/icon-twitter.png"></a>
+
+                                <a href="/connect/facebook"><img class="soc_med_icon" src="images/social_media_icons/icon-facebook.png"></a>
+
+                                <a href="/connect/google"><img class="soc_med_icon" src="images/social_media_icons/icon-google.png"></a>
+
+                                <a href="/connect/spotify"><img class="soc_med_icon" src="images/social_media_icons/icon-spotify.png"></a>
+
+                                <a href="/connect/soundcloud"><img class="soc_med_icon" src="images/social_media_icons/icon-soundcloud.png"></a>
+
+                                <a href="/connect/github"><img class="soc_med_icon" src="images/social_media_icons/icon-github.png"></a>
+
                             </div>
                         </div>
                     </form>

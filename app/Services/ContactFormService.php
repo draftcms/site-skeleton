@@ -23,10 +23,10 @@ class ContactFormService {
 
 			/* create ContactForm entry */
             ContactForms::create([
-                'name'       		=> $input['name'],
-                'email'      		=> $input['email'],
-                'type_id'   		=> $input['type_id'],
-                'notes'         	=> $input['notes'],
+                'name'       	=> $input['name'],
+                'email'      	=> $input['email'],
+                'type_id'   	=> $input['type_id'],
+                'notes'         => $input['notes'],
             ]);
 
 		} catch (\Exception $e) {
@@ -76,7 +76,6 @@ class ContactFormService {
 			});
 
 		} catch (\Exception $e) {
-			//dd($e);
 			$status = 'Your message could not be sent.';
 			$status_type = 'fail';
 			$redirect = redirect('contact')->withInput();

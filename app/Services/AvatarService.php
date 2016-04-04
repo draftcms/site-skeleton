@@ -38,7 +38,7 @@ class AvatarService {
         $details = [
             'extension' => $ext,
             'orig_name' => $orig_name,
-            'path'      => 'avatar/' . $f_name . '.' . $ext,
+            'path'      => 'avatar/' . $f_name . '.'    . $ext,
             'path_sm'   => 'avatar/' . $f_name . '_sm.' . $ext,
             'path_md'   => 'avatar/' . $f_name . '_md.' . $ext,
         ];

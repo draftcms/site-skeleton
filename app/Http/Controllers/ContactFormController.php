@@ -18,7 +18,6 @@ class ContactFormController extends Controller
      */
     public function getForm(Request $request)
     {
-
     	$types = ContactFormTypes::all();
 
         return view('contact.form')->with('types', $types);

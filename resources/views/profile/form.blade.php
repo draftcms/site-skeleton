@@ -72,46 +72,65 @@
                 <div class="panel-body">
 
                     <!--Facebook-->
-                    @if($providers->contains('facebook'))
-                        <a href="/disconnect/facebook" class="btn btn-primary">Disconnect from Facebook</a>
-                    @else
-                        <a href="/connect/facebook" class="btn btn-primary">Connect to Facebook</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-facebook.png">
+                        @if($providers->contains('facebook'))
+                        <a href="/disconnect/facebook" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/facebook" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
 
                     <!--Twitter-->
-                    @if($providers->contains('twitter'))
-                        <a href="/disconnect/twitter" class="btn btn-primary">Disconnect from Twitter</a>
-                    @else
-                        <a href="/connect/twitter" class="btn btn-primary">Connect to Twitter</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-twitter.png">
+                        @if($providers->contains('twitter'))
+                        <a href="/disconnect/twitter" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/twitter" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
 
                     <!--Google-->
-                    @if($providers->contains('google'))
-                        <a href="/disconnect/google" class="btn btn-primary">Disconnect from Google</a>
-                    @else
-                        <a href="/connect/google" class="btn btn-primary">Connect to Google</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-google.png">
+                        @if($providers->contains('google'))
+                        <a href="/disconnect/google" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/google" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
+
 
                     <!--GitHub-->
-                    @if($providers->contains('github'))
-                        <a href="/disconnect/github" class="btn btn-primary">Disconnect from GitHub</a>
-                    @else
-                        <a href="/connect/github" class="btn btn-primary">Connect to GitHub</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-github.png">
+                        @if($providers->contains('github'))
+                        <a href="/disconnect/github" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/github" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
 
                     <!--Spotify-->
-                    @if($providers->contains('spotify'))
-                        <a href="/disconnect/spotify" class="btn btn-primary">Disconnect from Spotify</a>
-                    @else
-                        <a href="/connect/spotify" class="btn btn-primary">Connect to Spotify</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-spotify.png">
+                        @if($providers->contains('spotify'))
+                        <a href="/disconnect/spotify" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/spotify" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
 
                     <!--SoundCloud-->
-                    @if($providers->contains('soundcloud'))
-                        <a href="/disconnect/soundcloud" class="btn btn-primary">Disconnect from SoundCloud</a>
-                    @else
-                        <a href="/connect/soundcloud" class="btn btn-primary">Connect to SoundCloud</a>
-                    @endif
+                    <div class="col-md-3 soc_med_connect">
+                        <img class="soc_med_icon" src="images/social_media_icons/icon-soundcloud.png">
+                        @if($providers->contains('soundcloud'))
+                        <a href="/disconnect/soundcloud" class="btn btn-primary active">Disconnect</a>
+                        @else
+                        <a href="/connect/soundcloud" class="btn btn-info">Connect</a>
+                        @endif
+                    </div>
 
                 </div>
             </div>

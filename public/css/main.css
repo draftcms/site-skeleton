@@ -1,0 +1,20 @@
+.soc_med_icon {
+	height: 50px;
+	width: 50px;
+}
+
+.soc_med_connect {
+	padding: 10px !important;
+}
+
+input{
+	border-radius: 0px !important;
+}
+
+button{
+	border-radius: 0px !important;
+}
+
+.btn {
+	border-radius: 0px !important;
+}
